@@ -1,0 +1,5 @@
+*
+!task_scheduler
+!manage.py
+!requirements.txt
+!.env

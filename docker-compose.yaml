@@ -1,0 +1,83 @@
+version: '3.4'
+
+services:
+
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:latest
+    networks:
+      - main
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+    ports:
+      - "6379:6379"
+    restart: on-failure
+
+  postgres:
+    container_name: postgres
+    hostname: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=dbpassword
+      - POSTGRES_DB=task_scheduler
+    networks:
+      - main
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+
+  task_scheduler:
+    build: .
+    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: task_scheduler
+    env_file: .env
+    depends_on:
+      - redis
+      - postgres
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    hostname: task_scheduler
+    image: task_scheduler
+    networks:
+      - main
+    restart: on-failure
+
+
+  celery_worker:
+    command: sh -c "celery -A task_scheduler worker -l info"
+    container_name: celery_worker
+    depends_on:
+      - postgres
+      - task_scheduler
+      - redis
+    hostname: celery_worker
+    image: task_scheduler
+    networks:
+      - main
+    restart: on-failure
+
+
+  celery_beat:
+    command: sh -c "celery -A task_scheduler beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    container_name: celery_beat
+    depends_on:
+      - postgres
+      - task_scheduler
+      - redis
+    hostname: celery_beat
+    image: task_scheduler
+    networks:
+      - main
+    restart: on-failure
+
+
+networks:
+  main:
+
+volumes:
+  postgresql-data:
