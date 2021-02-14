@@ -6,7 +6,7 @@ This project is to create a service that could run and manage a task at a specif
 To run this project you can use docker to quickly do the setup for redis, postgres and workers
 
 ### Using Docker
-Use the this command to bring everything up.    
+Use this command to bring everything up.    
 ```sh
 $ docker-compose up
 ```
