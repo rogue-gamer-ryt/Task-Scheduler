@@ -1,13 +1,12 @@
 #   Purpose: Celery initialization and django integration file
 
-
 import os
 
 from celery import Celery
 from celery.utils.log import get_task_logger
 from django.conf import settings
 
-from task_scheduler.helper import shift_files
+from task_scheduler.helper import helper_method
 
 # Set default Django settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'task_scheduler.settings')
@@ -21,16 +20,16 @@ logger = get_task_logger(__name__)
 
 
 @app.task
-def organize_files(path: str):
+def task_one():
     """
-    Task to check the disk usage and send an alert if the threshold has been breached
-    Args:
-        path (str): path of the folder
+    High-level task details
+
 
     Returns:
-
+        None
     """
     try:
-        shift_files(path)
+        logger.info("Launching task_one")
+        helper_method()
     except Exception:
         logger.error("Exception occurred")
