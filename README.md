@@ -1,22 +1,22 @@
 # Task Scheduler
 ## Overview
-This project is to create a service which could run and  manage a task at a specific time.
+This project is to create a service that could run and manage a task at a specific time.
 
 ## Setup
 To run this project you can use docker to quickly do the setup for redis, postgres and workers
 
 ### Using Docker
-Use the this command to bring everything up.    
+Use this command to bring everything up.    
 ```sh
 $ docker-compose up
 ```
 
 This will create 4 containers, more details below
-- **task_scheduler** : This the web app where you can manage the tasks like add, remove, schedule and etc.
-- **postgres** : Postgres is being used as the db for this project. It will be running on its default port ```5432```
-- **celery_worker** : This instance will run the scheduled tasks. You can modify the number of workers inside this instance.
-- **celery_beat** : Celery beat is responsible of assigning tasks to the celery workers whenever they are scheduled
-- **redis** : We are using redis as a message broker
+- **task_scheduler**: This the web app where you can manage the tasks like add, remove, schedule and etc.
+- **postgres**: Postgres is being used as the DB for this project. It will be running on its default port ```5432```
+- **celery_worker**: This instance will run the scheduled tasks. You can modify the number of workers inside this instance.
+- **celery_beat**: Celery beat is responsible for assigning tasks to the celery workers whenever they are scheduled
+- **redis**: We are using redis as a message broker
 
 To know more about it, check out the ```docker-compose.yaml``` of the project
 
