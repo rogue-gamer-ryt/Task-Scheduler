@@ -31,7 +31,7 @@ services:
 
   task_scheduler:
     build: .
-    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: ./docker_run_commands/task_scheduler.sh
     container_name: task_scheduler
     env_file: .env
     depends_on:
@@ -49,7 +49,7 @@ services:
 
 
   celery_worker:
-    command: sh -c "celery -A task_scheduler worker -l info"
+    command: ./docker_run_commands/celeryworker.sh
     container_name: celery_worker
     depends_on:
       - postgres
@@ -63,7 +63,7 @@ services:
 
 
   celery_beat:
-    command: sh -c "celery -A task_scheduler beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    command: ./docker_run_commands/celerybeat.sh
     container_name: celery_beat
     depends_on:
       - postgres

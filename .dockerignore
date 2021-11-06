@@ -3,3 +3,4 @@
 !manage.py
 !requirements.txt
 !.env
+!docker_run_commands

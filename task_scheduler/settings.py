@@ -62,6 +62,9 @@ TEMPLATES = [
     },
 ]
 
+# Admin Accounts
+ADMINS = ("admin", "admin@xyz.com")
+
 # Logging Setup
 LOGGING = {
     'version': 1,
@@ -118,28 +121,28 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default='<UPDATE THIS>')
 
 # THIS WILL CONNECT TO SQLITE DATABASE. USE THIS IF YOU WANT TO RUN IT DIRECTLY USING
 # COMMAND 'python manage.py runserver
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'task_database',  # This is where you put the name of the db file.
-        # If one doesn't exist, it will be created at migration time.
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'task_database',  # This is where you put the name of the db file.
+#         # If one doesn't exist, it will be created at migration time.
+#     }
+# }
 
 # USE THIS DATABASE CONFIGURATION IF YOUR ARE RUNNING IT WITH DOCKER
 # THIS WILL CONNECT TO POSTGRES CONTAINER WHEN 'docker-compose up' is used
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": 'task_scheduler',
-#         "USER": 'admin',
-#         "PASSWORD": 'dbpassword',
-#         "HOST": 'postgres',
-#         "PORT": '5432',
-#         "TEST": {"NAME": "test_task_scheduler"},
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": 'task_scheduler',
+        "USER": 'admin',
+        "PASSWORD": 'dbpassword',
+        "HOST": 'postgres',
+        "PORT": '5432',
+        "TEST": {"NAME": "test_task_scheduler"},
+    }
+}
 
 # Path to WSGI application
 WSGI_APPLICATION = "task_scheduler.wsgi.application"

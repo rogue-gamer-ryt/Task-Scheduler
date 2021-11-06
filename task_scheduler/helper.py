@@ -1,5 +1,5 @@
 #   Purpose: Helper files to write common functions
-from task_scheduler.celery import logger
+
 
 
 def helper_method():
@@ -9,5 +9,4 @@ def helper_method():
     Returns:
         None
     """
-    logger.debug("executing the helper_method")
     return None

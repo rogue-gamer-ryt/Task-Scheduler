@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.6-alpine
 
 # Install dependencies required for psycopg2 python package
 RUN apk add --no-cache postgresql-libs && \
@@ -13,5 +13,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN apk --purge del .build-deps
 
 EXPOSE 8000
-
-CMD ["gunicorn", "task_scheduler.wsgi", "0:8000"]
