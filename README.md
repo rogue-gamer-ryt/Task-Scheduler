@@ -73,7 +73,7 @@ CELERY_BROKER_URL = f'redis://{redis_host}:6379'
 ```
 #### 3. You could also run the application by using the command
 ```sh
-$ python3 manage.py runserver
+python3 manage.py runserver
 ```
 For this either update the postgres connection settings based on your database in the ```settings.py``` file or you could use SQLite connection details inside the same file.
 
