@@ -9,7 +9,7 @@ import environ
 # Get paths to important directories; stored as Pathlib paths
 PROJECT_ROOT = Path(__file__).parents[1]
 # Read .env file
-env = environ.Env(CONFIG_PATH=(str, None), CURRENT_ENV=(str, None))
+env = environ.Env()
 env.read_env(str(PROJECT_ROOT.joinpath(".env")))
 
 # Static files (CSS, JavaScript, Images)
