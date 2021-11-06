@@ -17,7 +17,7 @@ DJANGO_SUPERUSER_USERNAME="admin"
 ```
 #### 2. Use this command to bring everything up.    
 ```sh
-$ docker-compose up
+docker-compose up
 ```
 
 #### 3. This will create 4 containers, more details below
@@ -87,6 +87,8 @@ Command to start celery beat:
 ```
 celery -A task_scheduler beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
+## Additional link
+- You can read more about this project over [here](https://ashun.vercel.app/blog/task-scheduler)
 
 ## Tech Stack reference
 
