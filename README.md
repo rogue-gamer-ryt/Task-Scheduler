@@ -1,6 +1,6 @@
 # Task Scheduler
 ## Overview
-This pro1ject is to create a service that could run and manage a task at a specific time.
+This project is to create a service that could run and manage a task/script at a specific time.
 
 ## Setup
 To run this project you can use docker to quickly do the setup for redis, postgres and workers
